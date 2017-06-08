@@ -15,17 +15,19 @@ def getPage(url):
 	
 # scraper website: greyhound-data.com
 def main():
-
+	
 	wortliste = []
 	for i in range(0,4,1):
 		fobj = open('heise-data.csv', 'w')
 		csvw = csv.writer(fobj, delimiter = ';')      
 		heise_url = "https://www.heise.de/thema/https?seite=" + str(i)
+		# ueberschriften extrahieren
 		content = getPage(heise_url).find("div", { "id" : "mitte_uebersicht" })
 		content = content.find("nav")
 		content = content.findAll('a', href=True)
 		
 		for c in content:
+			# wortliste fuellen
 			c = re.findall("\w+(?=-)" ,c['href'])
 			c = [x.lower() for x in c]
 			wortliste.extend(c)
@@ -33,8 +35,9 @@ def main():
 	fobj.close()                                # close file
 	
 	
+	#woerter zaehlen 
 	counter=collections.Counter(wortliste)
-	
+	#anzahl ausgeben
 	print(counter)
 	
 	print("\nDONE !\n\n\nHeise.com was scraped.\n")
