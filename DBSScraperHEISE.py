@@ -17,9 +17,7 @@ def getPage(url):
 def main():
 	
 	wortliste = []
-	for i in range(0,4,1):
-		fobj = open('heise-data.csv', 'w')
-		csvw = csv.writer(fobj, delimiter = ';')      
+	for i in range(0,4,1):  
 		heise_url = "https://www.heise.de/thema/https?seite=" + str(i)
 		# ueberschriften extrahieren
 		content = getPage(heise_url).find("div", { "id" : "mitte_uebersicht" })
@@ -31,8 +29,6 @@ def main():
 			c = re.findall("\w+(?=-)" ,c['href'])
 			c = [x.lower() for x in c]
 			wortliste.extend(c)
-
-	fobj.close()                                # close file
 	
 	
 	#woerter zaehlen 
