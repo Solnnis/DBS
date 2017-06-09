@@ -30,11 +30,11 @@ def main():
 			c = [x.lower() for x in c]
 			wortliste.extend(c)
 	
-	
 	#woerter zaehlen 
 	counter=collections.Counter(wortliste)
 	#anzahl ausgeben
-	print(counter)
+	print("Top-3 Woerter in den Ueberschriften aller zum Thema https veroefentlichten Artikel auf heise.de:")
+	print(counter.most_common(3))	
 	
 	print("\nDONE !\n\n\nHeise.com was scraped.\n")
 
